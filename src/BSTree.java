@@ -112,8 +112,8 @@ public class BSTree<T>
 
 	public T search(int key)
 	{
-		BNode<T> findNode = searchHelper(root, key);
-		return findNode == null ? null : findNode.getValue();
+		BNode<T> foundNode = searchHelper(root, key);
+		return foundNode == null ? null : foundNode.getValue();
 	}
 
 	private BNode<T> searchHelper(BNode<T> node, int key)
@@ -244,7 +244,7 @@ public class BSTree<T>
 	public T remove(int key)
 	{
 		//TODO
-		searchHelper(root, key);
+		BNode<T> foundNode = searchHelper(root, key);
 		return null;
 	}
 
