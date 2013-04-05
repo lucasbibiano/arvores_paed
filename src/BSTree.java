@@ -244,8 +244,20 @@ public class BSTree<T>
 	public T remove(int key)
 	{
 		//TODO
+		/*
 		BNode<T> foundNode = searchHelper(root, key);
-		return null;
+		
+		if (foundNode == null)
+			return null;
+		
+		if (foundNode.hasRightChild()) {
+			BNode<T> successor = getSuccessorHelper(key);
+			
+			BNode<T> parent = 
+			
+		} else {
+			
+		}*/
 	}
 
 	public BNode<T> getRoot() 
