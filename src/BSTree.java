@@ -43,6 +43,8 @@ public class BSTree<T>
 	return true;
     }
     
+    
+    
     public void breadthTraversalPrint()
     {
 	Queue<BNode<T>> queue = new ArrayDeque<BNode<T>>();
@@ -160,7 +162,8 @@ public class BSTree<T>
     
     public T getPredecessor(int key)
     {
-	return null;
+	BNode<T> predecessorNode = getPredecessorHelper(key);
+	return predecessorNode == null ? null : predecessorNode.getValue();
     }
     
     public BNode<T> getPredecessorHelper(int key)
@@ -173,6 +176,9 @@ public class BSTree<T>
 	}
 	else 
 	{
+	    if (node == getRoot())
+		return null;
+	    
 	    node = node.getParent();
 	    
 	    while (node.getKey() > key)
@@ -186,7 +192,8 @@ public class BSTree<T>
     
     public T getSuccessor(int key)
     {
-	return getSuccessorHelper(key).getValue();
+	BNode<T> successorNode = getSuccessorHelper(key);
+	return successorNode == null ? null : successorNode.getValue();    
     }
     
     public BNode<T> getSuccessorHelper(int key)
@@ -237,7 +244,7 @@ public class BSTree<T>
     
     public T remove(int key)
     {
-	return null;
+	throw new UnsupportedOperationException("Só inserção, nada de remover!");
     }
 
     public BNode<T> getRoot() 

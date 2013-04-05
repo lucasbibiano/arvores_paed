@@ -7,7 +7,7 @@ public class BNode<T>
     
     protected BNode<?>[] children;
     
-    public BNode(int numOfChildren) 
+    public BNode(int numOfChildren)
     {
 	this.key = 0;
 	children = new BNode<?>[numOfChildren];
@@ -27,7 +27,7 @@ public class BNode<T>
     {
 	return (BNode<T>) children[1];
     }
-
+    
     public T getValue() 
     {
 	return value;

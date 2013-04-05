@@ -5,7 +5,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-
 	RBTree<Integer> rbtree = new RBTree<Integer>();
 	
 	rbtree.insert(42, 42);
@@ -35,6 +34,8 @@ public class Main {
 	rbtree.insert(19, 19); //destroi a parada feio
 
 	rbtree.breadthTraversalPrint();
+	
+	System.out.println(rbtree.isValid());
     }
 
 }

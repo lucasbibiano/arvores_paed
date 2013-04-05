@@ -19,15 +19,43 @@ public class RBTree<T> extends BSTree<T>
 	
 	if (root.getColor() == RBNode.RED)
 	    return false;
-	
-	return true;
+		
+	return hasSameBlackHeight(root);
     }
     
+    private boolean hasSameBlackHeight(RBNode<T> node) {
+	if (node.isEmpty())
+	    return true;
+	
+	RBNode<T> left = (RBNode<T>) node.getLeft();
+	RBNode<T> right = (RBNode<T>) node.getRight();
+	
+	int bhLeft = getBlackHeight(left, 0);
+	int bhRight = getBlackHeight(right, 0);
+	
+	if (bhLeft != bhRight)
+	    return false;
+	else
+	    return hasSameBlackHeight(left) && hasSameBlackHeight(right);	
+    }
+
     //nao sei traduzir altura de preto
-    private boolean hasSameBlackHeight(RBNode<T> node, int actualHeight)
+    private int getBlackHeight(RBNode<T> node, int actualHeight)
     {
-	//TODO
-	return true;
+	if (node.isEmpty())
+	    return actualHeight;
+	else
+	{
+	    if (node.getColor() == RBNode.BLACK)
+	    {
+		actualHeight++;
+	    }
+	    
+	    RBNode<T> left = (RBNode<T>) node.getLeft();
+	    RBNode<T> right = (RBNode<T>) node.getRight();
+	    
+	    return Math.max(getBlackHeight(left, actualHeight), getBlackHeight(right, actualHeight));
+	}
     }
     
     @Override
