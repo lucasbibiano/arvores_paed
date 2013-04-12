@@ -287,16 +287,17 @@ public class BSTree<T>
 			if (successor.hasRightChild())
 			{	
 				BNode<T> parent = successor.getParent();
-				
-				if (parent == foundNode)
-					parent.setRight(successor.getRight());
-				else
+					
+				if (parent != foundNode)
 					parent.setLeft(successor.getRight());
 			}
 			 
-			//successor.setRight(foundNode.getRight());
-
 			successor.setLeft(foundNode.getLeft());
+			
+			if (foundNode != successor.getParent())
+				successor.setRight(foundNode.getRight());
+			
+			successor.getParent().setLeft(new BNode<T>());
 			
 			if (getRoot() == foundNode)
 				setRoot(successor);
