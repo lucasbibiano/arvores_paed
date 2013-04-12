@@ -49,20 +49,33 @@ public class BSTree<T>
 
 		queue.offer(root);
 
+		int k = 1;
+		int i = 0;
+		
 		while (!queue.isEmpty())
 		{
+			i++;
+			
+			if (k == i)
+			{
+				k = k * 2;
+				System.out.println();
+			}
+			
 			BNode<T> node = queue.poll();
 
 			if (node.isEmpty())
 			{
-				System.out.println("E");
+				System.out.print("E - ");
 				continue;
 			}
 
-			System.out.println(node.getValue());
+			System.out.print(node.getValue() + " - ");
 			queue.offer(node.getLeft());
 			queue.offer(node.getRight());
 		}
+		
+		System.out.println("=====================");
 	}
 
 	public void printInOrder()
@@ -98,6 +111,7 @@ public class BSTree<T>
 	public void printPreOrder()
 	{
 		preorder(root);
+		System.out.println("\n==============================");
 	}
 
 	private void preorder(BNode<T> node)
@@ -105,7 +119,7 @@ public class BSTree<T>
 		if (node.isEmpty())
 			return;
 
-		System.out.println(node.getValue());	
+		System.out.print(node.getValue() + " ");	
 		preorder(node.getLeft());
 		preorder(node.getRight());
 	}
@@ -136,7 +150,7 @@ public class BSTree<T>
 
 	private BNode<T> getMinHelper(BNode<T> node)
 	{	
-		while (!node.isEmpty())
+		while (!node.getLeft().isEmpty())
 		{
 			node = node.getLeft();
 		}
@@ -151,7 +165,7 @@ public class BSTree<T>
 
 	private BNode<T> getMaxHelper(BNode<T> node)
 	{
-		while (!node.isEmpty())
+		while (!node.getRight().isEmpty())
 		{
 			node = node.getRight();
 		}
@@ -243,21 +257,67 @@ public class BSTree<T>
 
 	public T remove(int key)
 	{
-		//TODO
-		/*
 		BNode<T> foundNode = searchHelper(root, key);
 		
 		if (foundNode == null)
 			return null;
 		
-		if (foundNode.hasRightChild()) {
+		//se o nó não tiver filhos
+		if (!(foundNode.hasLeftChild() || foundNode.hasRightChild()))
+		{	
+			if (getRoot() == foundNode) 
+			{
+				setRoot(new BNode<T>());
+			} 
+			else 
+			{
+				BNode<T> parent = foundNode.getParent();
+				
+				if (foundNode.isLeft())
+					parent.setLeft(new BNode<T>());
+				else
+					parent.setRight(new BNode<T>());
+			}
+		}
+		
+		if (foundNode.hasRightChild()) 
+		{
 			BNode<T> successor = getSuccessorHelper(key);
 			
-			BNode<T> parent = 
+			if (successor.hasRightChild())
+			{	
+				BNode<T> parent = successor.getParent();
+				
+				if (parent == foundNode)
+					parent.setRight(successor.getRight());
+				else
+					parent.setLeft(successor.getRight());
+			}
+			 
+			//successor.setRight(foundNode.getRight());
+
+			successor.setLeft(foundNode.getLeft());
 			
-		} else {
-			
-		}*/
+			if (getRoot() == foundNode)
+				setRoot(successor);
+			else 
+				if (foundNode.isLeft())
+					foundNode.getParent().setLeft(successor);
+				else
+					foundNode.getParent().setRight(successor);
+		} 
+		else if (foundNode.hasLeftChild()) 
+		{
+			if (getRoot() == foundNode)
+				setRoot(foundNode.getLeft());
+			else 
+				if (foundNode.isLeft())
+					foundNode.getParent().setLeft(foundNode.getLeft());
+				else
+					foundNode.getParent().setRight(foundNode.getLeft());
+		}
+		
+		return foundNode.getValue();
 	}
 
 	public BNode<T> getRoot() 
