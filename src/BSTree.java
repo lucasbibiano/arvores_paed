@@ -321,6 +321,14 @@ public class BSTree<T>
 			}
 		}
 		
+		//CASO 3: NÓ TEM DOIS FILHOS
+		
+		//substitui pelo sucessor
+		
+		if( foundNode.hasLeftChild() && foundNode.hasRightChild())
+		{
+			
+		}
 		
 		//se o n�� n��o tiver filhos
 //		if (!(foundNode.hasLeftChild() || foundNode.hasRightChild()))
