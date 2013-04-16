@@ -1,5 +1,5 @@
 
-public class RBNode<T> extends BNode<T>
+public class RBNode<T> extends BSNode<T>
 {
 	private enum Color { DOUBLE_BLACK, BLACK, RED };
 

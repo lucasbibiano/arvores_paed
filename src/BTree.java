@@ -1,11 +1,11 @@
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class BSTree<T> 
+public class BTree<T> 
 {
 	private BSNode<T> root;
 
-	public BSTree()
+	public BTree()
 	{
 		root = new BSNode<T>();
 	}

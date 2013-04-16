@@ -1,31 +1,31 @@
 @SuppressWarnings("unchecked")
-public class BNode<T>
+public class BSNode<T>
 {
 	private T value;
 	private int key;
-	private BNode<T> parent;
+	private BSNode<T> parent;
 
-	protected BNode<?>[] children;
+	protected BSNode<?>[] children;
 
-	public BNode(int numOfChildren)
+	public BSNode(int numOfChildren)
 	{
 		this.key = 0;
-		children = new BNode<?>[numOfChildren];
+		children = new BSNode<?>[numOfChildren];
 	}
 
-	public BNode() 
+	public BSNode() 
 	{
 		this(2);
 	}
 
-	public BNode<T> getLeft()
+	public BSNode<T> getLeft()
 	{
-		return (BNode<T>) children[0];
+		return (BSNode<T>) children[0];
 	}
 
-	public BNode<T> getRight()
+	public BSNode<T> getRight()
 	{
-		return (BNode<T>) children[1];
+		return (BSNode<T>) children[1];
 	}
 
 	public T getValue() 
@@ -50,7 +50,7 @@ public class BNode<T>
 		//e seus filhos s�o inicializados
 		for (int i = 0; i < 2; i++)
 		{
-			BNode<T> node = new BNode<T>();
+			BSNode<T> node = new BSNode<T>();
 			node.setParent(this);
 			children[i] = node;
 		}
@@ -61,13 +61,13 @@ public class BNode<T>
 		this.key = key;
 	}
 
-	public void setLeft(BNode<T> node)
+	public void setLeft(BSNode<T> node)
 	{
 		node.setParent(this);
 		children[0] = node;
 	}
 
-	public void setRight(BNode<T> node)
+	public void setRight(BSNode<T> node)
 	{
 		node.setParent(this);
 		children[1] = node;
@@ -80,7 +80,7 @@ public class BNode<T>
 
 	public boolean hasChild(int num)
 	{
-		return children[num] != null && !((BNode<T>) children[num]).isEmpty();
+		return children[num] != null && !((BSNode<T>) children[num]).isEmpty();
 	}
 
 	public boolean hasLeftChild()
@@ -103,28 +103,28 @@ public class BNode<T>
 		return !isLeft();
 	}
 
-	public BNode<T> getBrother()
+	public BSNode<T> getBrother()
 	{
 		boolean isLeft = isLeft();
 		return (isLeft ? parent.getRight() : parent.getLeft());
 	}
 
-	public BNode<T> getUncle()
+	public BSNode<T> getUncle()
 	{
 		return parent.getBrother();
 	}
 
-	public BNode<T> getGrandfather()
+	public BSNode<T> getGrandfather()
 	{
 		return parent.getParent();
 	}
 
-	public BNode<T> getParent() 
+	public BSNode<T> getParent() 
 	{
 		return parent;
 	}
 
-	public void setParent(BNode<T> parent) 
+	public void setParent(BSNode<T> parent) 
 	{
 		this.parent = parent;
 	}

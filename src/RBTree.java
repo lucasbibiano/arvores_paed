@@ -98,7 +98,7 @@ public class RBTree<T> extends BSTree<T>
 		return insertHelper(getRoot(), value, key);
 	}
 
-	private boolean insertHelper(BNode<T> rbnode, T value, int key)
+	private boolean insertHelper(BSNode<T> rbnode, T value, int key)
 	{
 		RBNode<T> node = (RBNode<T>) rbnode;
 
