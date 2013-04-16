@@ -29,6 +29,15 @@ public class Main {
 
 	rbtree.remove(42);
 	rbtree.printPreOrder();
+
+	rbtree.remove(80);
+	rbtree.printPreOrder();
+	
+	rbtree.remove(90);
+	rbtree.printPreOrder();
+	
+	rbtree.remove(91);
+	rbtree.printPreOrder();
 	
 	System.out.println(rbtree.isValid());
     }
