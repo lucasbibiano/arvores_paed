@@ -262,130 +262,62 @@ public class BSTree<T>
 		if (foundNode == null)
 			return null;
 		
-		
-		//CASO 1: NÓ SEM FILHOS
-		
-		//verifica se é filho esquerdo ou direito e seta
-		//o respectivo filho de seu pai pra null
-		
-		//falta fazer o caso em que o foundNode é raiz
-		
-		BNode<T> parent = foundNode.getParent();
-		
-		if( ! ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) )
-		{
-			if (foundNode.isLeft())
-			{
-				parent.setLeft(new BNode<T>());
-			}
-			else
-			{
-				parent.setRight(new BNode<T>());
-			}
-		}
-		
-		//CASO 2: NÓ SÓ TEM UM FILHO
-		
-		//substitui o pai
-		
-		if ( ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) 
-				&& !( foundNode.hasLeftChild() && foundNode.hasRightChild() )
-				)
-		{
-			if(foundNode.hasLeftChild()){
-				
-				BNode<T> son = foundNode.getLeft();
-				
-				if (foundNode.isLeft())
-				{
-					parent.setLeft(son);
-				}
-				else
-				{
-					parent.setRight(son);
-				}
-			}
-			else{
-				
-				BNode<T> son = foundNode.getRight();
-				
-				if (foundNode.isLeft())
-				{
-					parent.setLeft(son);
-				}
-				else
-				{
-					parent.setRight(son);
-				}
-				
-			}
-		}
-		
-		//CASO 3: NÓ TEM DOIS FILHOS
-		
-		//substitui pelo sucessor
-		
-		if( foundNode.hasLeftChild() && foundNode.hasRightChild())
-		{
-			
-		}
-		
 		//se o n�� n��o tiver filhos
-//		if (!(foundNode.hasLeftChild() || foundNode.hasRightChild()))
-//		{	
-//			if (getRoot() == foundNode) 
-//			{
-//				setRoot(new BNode<T>());
-//			} 
-//			else 
-//			{
-//				BNode<T> parent = foundNode.getParent();
-//				
-//				if (foundNode.isLeft())
-//					parent.setLeft(new BNode<T>());
-//				else
-//					parent.setRight(new BNode<T>());
-//			}
-//		}
-//		
-//		if (foundNode.hasRightChild()) 
-//		{
-//			BNode<T> successor = getSuccessorHelper(key);
-//			
-//			if (successor.hasRightChild())
-//			{	
-//				BNode<T> parent = successor.getParent();
-//					
-//				if (parent != foundNode)
-//					parent.setLeft(successor.getRight());
-//			}
-//			 
-//			successor.setLeft(foundNode.getLeft());
-//			
-//			if (foundNode != successor.getParent())
-//				successor.setRight(foundNode.getRight());
-//			
-//			successor.getParent().setLeft(new BNode<T>());
-//			
-//			if (getRoot() == foundNode)
-//				setRoot(successor);
-//			else 
-//				if (foundNode.isLeft())
-//					foundNode.getParent().setLeft(successor);
-//				else
-//					foundNode.getParent().setRight(successor);
-//		} 
-//		else if (foundNode.hasLeftChild()) 
-//		{
-//			if (getRoot() == foundNode)
-//				setRoot(foundNode.getLeft());
-//			else 
-//				if (foundNode.isLeft())
-//					foundNode.getParent().setLeft(foundNode.getLeft());
-//				else
-//					foundNode.getParent().setRight(foundNode.getLeft());
-//		}
-//		
+		if (!(foundNode.hasLeftChild() || foundNode.hasRightChild()))
+		{	
+			if (getRoot() == foundNode) 
+			{
+				setRoot(new BNode<T>());
+			} 
+			else 
+			{
+				BNode<T> parent = foundNode.getParent();
+				
+				if (foundNode.isLeft())
+					parent.setLeft(new BNode<T>());
+				else
+					parent.setRight(new BNode<T>());
+			}
+		}
+		
+		if (foundNode.hasRightChild()) 
+		{
+			BNode<T> successor = getSuccessorHelper(key);
+			
+			if (successor.hasRightChild())
+			{	
+				BNode<T> parent = successor.getParent();
+					
+				if (parent != foundNode)
+					parent.setLeft(successor.getRight());
+			}
+			 
+			successor.setLeft(foundNode.getLeft());
+			
+			if (foundNode != successor.getParent())
+				successor.setRight(foundNode.getRight());
+			
+			successor.getParent().setLeft(new BNode<T>());
+			
+			if (getRoot() == foundNode)
+				setRoot(successor);
+			else 
+				if (foundNode.isLeft())
+					foundNode.getParent().setLeft(successor);
+				else
+					foundNode.getParent().setRight(successor);
+		} 
+		else if (foundNode.hasLeftChild()) 
+		{
+			if (getRoot() == foundNode)
+				setRoot(foundNode.getLeft());
+			else 
+				if (foundNode.isLeft())
+					foundNode.getParent().setLeft(foundNode.getLeft());
+				else
+					foundNode.getParent().setRight(foundNode.getLeft());
+		}
+		
 		return foundNode.getValue();
 	}
 
@@ -398,4 +330,103 @@ public class BSTree<T>
 	{
 		this.root = root;
 	}
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////CASO 1: NÓ SEM FILHOS
+//
+////verifica se é filho esquerdo ou direito e seta
+////o respectivo filho de seu pai pra null
+//
+////falta fazer o caso em que o foundNode é raiz
+//
+//BNode<T> parent = foundNode.getParent();
+//
+//if( ! ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) )
+//{
+//	if (foundNode.isLeft())
+//	{
+//		parent.setLeft(new BNode<T>());
+//	}
+//	else
+//	{
+//		parent.setRight(new BNode<T>());
+//	}
+//}
+//
+////CASO 2: NÓ SÓ TEM UM FILHO
+//
+////substitui o pai
+//
+//if ( ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) 
+//		&& !( foundNode.hasLeftChild() && foundNode.hasRightChild() )
+//		)
+//{
+//	if(foundNode.hasLeftChild()){
+//		
+//		BNode<T> son = foundNode.getLeft();
+//		
+//		if (foundNode.isLeft())
+//		{
+//			parent.setLeft(son);
+//		}
+//		else
+//		{
+//			parent.setRight(son);
+//		}
+//	}
+//	else{
+//		
+//		BNode<T> son = foundNode.getRight();
+//		
+//		if (foundNode.isLeft())
+//		{
+//			parent.setLeft(son);
+//		}
+//		else
+//		{
+//			parent.setRight(son);
+//		}
+//		
+//	}
+//}
+//
+////CASO 3: NÓ TEM DOIS FILHOS
+//
+////substitui pelo sucessor
+//
+//if( foundNode.hasLeftChild() && foundNode.hasRightChild())
+//{	} 

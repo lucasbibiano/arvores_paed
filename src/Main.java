@@ -27,7 +27,7 @@ public class Main {
 	rbtree.insert(19, 19);
 	rbtree.printPreOrder();
 
-	rbtree.remove(23);
+	rbtree.remove(90);
 	rbtree.printPreOrder();
 	
 	System.out.println(rbtree.isValid());
