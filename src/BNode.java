@@ -1,24 +1,17 @@
-import java.util.ArrayList;
-
-@SuppressWarnings("unchecked")
 public class BNode<T> extends BSNode<T>
 {
-	private ArrayList<BNode<T>> list_node;
-	int valueOfT = 0;
+	private BNode<T> next = null;
 	
-	public BNode(int valueOfT)
+	public BNode(){}
+	
+	public BNode<T> getNext()
 	{
-		this.valueOfT = valueOfT;
-		this.list_node = new ArrayList<BNode<T>>((valueOfT*2)+1);
+		return next;
+	}
+	
+	public void setNext(BNode<T> node)
+	{
+		next = node;
 	}
 
-	public void initChildren()
-	{
-		for (int i = 0; i < 2; i++)
-		{
-			BSNode<T> node = new BSNode<T>(valueOfT);
-			node.setParent(this);
-			children[i] = node;
-		}
-	}
 }

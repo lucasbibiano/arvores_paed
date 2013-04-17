@@ -3,22 +3,25 @@ import java.util.Queue;
 
 public class BTree<T> 
 {
-	private BSNode<T> root;
+	private BNode<T> root;
+	
+	//numero de chaves dentro de um nó
+	int numberOfKeys = 0;
 
 	public BTree()
 	{
-		root = new BSNode<T>();
+		root = new BNode<T>();
 	}
 
 	public boolean isValid()
 	{
-		Queue<BSNode<T>> queue = new ArrayDeque<BSNode<T>>();
+		Queue<BNode<T>> queue = new ArrayDeque<BNode<T>>();
 
 		queue.offer(root);
 
 		while (!queue.isEmpty())
 		{
-			BSNode<T> node = queue.poll();
+			BNode<T> node = queue.poll();
 
 			if (node.isEmpty())
 			{
@@ -34,9 +37,13 @@ public class BTree<T>
 				//se o no eh direito e a chave dele eh menor do que a do pai
 				if (node.isRight() && node.getKey() < node.getParent().getKey())
 					return false;
+				
+				//se o no tem next menor do que ele
+				if (node.getNext().getKey() < node.getKey())
+					return false;
 
-				queue.offer(node.getLeft());
-				queue.offer(node.getRight());
+				queue.offer((BNode<T>) node.getLeft());
+				queue.offer((BNode<T>) node.getRight());
 			}
 		}
 
@@ -45,7 +52,7 @@ public class BTree<T>
 
 	public void breadthTraversalPrint()
 	{
-		Queue<BSNode<T>> queue = new ArrayDeque<BSNode<T>>();
+		Queue<BNode<T>> queue = new ArrayDeque<BNode<T>>();
 
 		queue.offer(root);
 
@@ -62,7 +69,7 @@ public class BTree<T>
 				System.out.println();
 			}
 			
-			BSNode<T> node = queue.poll();
+			BNode<T> node = queue.poll();
 
 			if (node.isEmpty())
 			{
@@ -83,7 +90,7 @@ public class BTree<T>
 		inorder(root);
 	}
 
-	private void inorder(BSNode<T> node)
+	private void inorder(BNode<T> node)
 	{
 		if (node.isEmpty())
 			return;
@@ -98,7 +105,7 @@ public class BTree<T>
 		postorder(root);
 	}
 
-	private void postorder(BSNode<T> node)
+	private void postorder(BNode<T> node)
 	{
 		if (node.isEmpty())
 			return;
@@ -114,7 +121,7 @@ public class BTree<T>
 		System.out.println("\n==============================");
 	}
 
-	private void preorder(BSNode<T> node)
+	private void preorder(BNode<T> node)
 	{
 		if (node.isEmpty())
 			return;
@@ -126,11 +133,11 @@ public class BTree<T>
 
 	public T search(int key)
 	{
-		BSNode<T> foundNode = searchHelper(root, key);
+		BNode<T> foundNode = searchHelper(root, key);
 		return foundNode == null ? null : foundNode.getValue();
 	}
 
-	private BSNode<T> searchHelper(BSNode<T> node, int key)
+	private BNode<T> searchHelper(BNode<T> node, int key)
 	{
 		if (node.isEmpty())
 			return null;
@@ -148,7 +155,7 @@ public class BTree<T>
 		return getMinHelper(root).getValue();
 	}
 
-	private BSNode<T> getMinHelper(BSNode<T> node)
+	private BNode<T> getMinHelper(BNode<T> node)
 	{	
 		while (!node.getLeft().isEmpty())
 		{
@@ -163,7 +170,7 @@ public class BTree<T>
 		return getMaxHelper(root).getValue();
 	}
 
-	private BSNode<T> getMaxHelper(BSNode<T> node)
+	private BNode<T> getMaxHelper(BNode<T> node)
 	{
 		while (!node.getRight().isEmpty())
 		{
@@ -175,13 +182,13 @@ public class BTree<T>
 
 	public T getPredecessor(int key)
 	{
-		BSNode<T> predecessorNode = getPredecessorHelper(key);
+		BNode<T> predecessorNode = getPredecessorHelper(key);
 		return predecessorNode == null ? null : predecessorNode.getValue();
 	}
 
-	public BSNode<T> getPredecessorHelper(int key)
+	public BNode<T> getPredecessorHelper(int key)
 	{
-		BSNode<T> node = searchHelper(root, key);
+		BNode<T> node = searchHelper(root, key);
 
 		if (node.hasLeftChild())
 		{
@@ -205,13 +212,13 @@ public class BTree<T>
 
 	public T getSuccessor(int key)
 	{
-		BSNode<T> successorNode = getSuccessorHelper(key);
+		BNode<T> successorNode = getSuccessorHelper(key);
 		return successorNode == null ? null : successorNode.getValue();    
 	}
 
-	public BSNode<T> getSuccessorHelper(int key)
+	public BNode<T> getSuccessorHelper(int key)
 	{
-		BSNode<T> node = searchHelper(root, key);
+		BNode<T> node = searchHelper(root, key);
 
 		if (node.hasRightChild())
 		{
@@ -235,7 +242,7 @@ public class BTree<T>
 		return insertHelper(root, value, key);
 	}
 
-	private boolean insertHelper(BSNode<T> node, T value, int key)
+	private boolean insertHelper(BNode<T> node, T value, int key)
 	{
 		if (node.isEmpty())
 		{
@@ -257,7 +264,7 @@ public class BTree<T>
 
 	public T remove(int key)
 	{
-		BSNode<T> foundNode = searchHelper(root, key);
+		BNode<T> foundNode = searchHelper(root, key);
 		
 		if (foundNode == null)
 			return null;
@@ -270,17 +277,17 @@ public class BTree<T>
 		
 		//falta fazer o caso em que o foundNode é raiz
 		
-		BSNode<T> parent = foundNode.getParent();
+		BNode<T> parent = foundNode.getParent();
 		
 		if( ! ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) )
 		{
 			if (foundNode.isLeft())
 			{
-				parent.setLeft(new BSNode<T>());
+				parent.setLeft(new BNode<T>());
 			}
 			else
 			{
-				parent.setRight(new BSNode<T>());
+				parent.setRight(new BNode<T>());
 			}
 		}
 		
@@ -294,7 +301,7 @@ public class BTree<T>
 		{
 			if(foundNode.hasLeftChild()){
 				
-				BSNode<T> son = foundNode.getLeft();
+				BNode<T> son = foundNode.getLeft();
 				
 				if (foundNode.isLeft())
 				{
@@ -307,7 +314,7 @@ public class BTree<T>
 			}
 			else{
 				
-				BSNode<T> son = foundNode.getRight();
+				BNode<T> son = foundNode.getRight();
 				
 				if (foundNode.isLeft())
 				{
@@ -389,12 +396,12 @@ public class BTree<T>
 		return foundNode.getValue();
 	}
 
-	public BSNode<T> getRoot() 
+	public BNode<T> getRoot() 
 	{
 		return root;
 	}
 
-	public void setRoot(BSNode<T> root) 
+	public void setRoot(BNode<T> root) 
 	{
 		this.root = root;
 	}
