@@ -267,26 +267,26 @@ public class BSTree<T>
 		{	
 			if (getRoot() == foundNode) 
 			{
-				setRoot(new BNode<T>());
+				setRoot(new BSNode<T>());
 			} 
 			else 
 			{
-				BNode<T> parent = foundNode.getParent();
+				BSNode<T> parent = foundNode.getParent();
 				
 				if (foundNode.isLeft())
-					parent.setLeft(new BNode<T>());
+					parent.setLeft(new BSNode<T>());
 				else
-					parent.setRight(new BNode<T>());
+					parent.setRight(new BSNode<T>());
 			}
 		}
 		
 		if (foundNode.hasRightChild()) 
 		{
-			BNode<T> successor = getSuccessorHelper(key);
+			BSNode<T> successor = getSuccessorHelper(key);
 			
 			if (successor.hasRightChild())
 			{	
-				BNode<T> parent = successor.getParent();
+				BSNode<T> parent = successor.getParent();
 					
 				if (parent != foundNode)
 					parent.setLeft(successor.getRight());
@@ -297,7 +297,7 @@ public class BSTree<T>
 			if (foundNode != successor.getParent())
 				successor.setRight(foundNode.getRight());
 			
-			successor.getParent().setLeft(new BNode<T>());
+			successor.getParent().setLeft(new BSNode<T>());
 			
 			if (getRoot() == foundNode)
 				setRoot(successor);
@@ -373,17 +373,17 @@ public class BSTree<T>
 //
 ////falta fazer o caso em que o foundNode é raiz
 //
-//BNode<T> parent = foundNode.getParent();
+//BSNode<T> parent = foundNode.getParent();
 //
 //if( ! ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) )
 //{
 //	if (foundNode.isLeft())
 //	{
-//		parent.setLeft(new BNode<T>());
+//		parent.setLeft(new BSNode<T>());
 //	}
 //	else
 //	{
-//		parent.setRight(new BNode<T>());
+//		parent.setRight(new BSNode<T>());
 //	}
 //}
 //
@@ -397,7 +397,7 @@ public class BSTree<T>
 //{
 //	if(foundNode.hasLeftChild()){
 //		
-//		BNode<T> son = foundNode.getLeft();
+//		BSNode<T> son = foundNode.getLeft();
 //		
 //		if (foundNode.isLeft())
 //		{
@@ -410,7 +410,7 @@ public class BSTree<T>
 //	}
 //	else{
 //		
-//		BNode<T> son = foundNode.getRight();
+//		BSNode<T> son = foundNode.getRight();
 //		
 //		if (foundNode.isLeft())
 //		{
