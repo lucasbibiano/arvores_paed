@@ -218,5 +218,15 @@ public class RBTree<T> extends BSTree<T>
 		x.setRight(y.getLeft());	
 		y.setLeft(x);
 	}
+	
+	@Override
+	public T remove(int key){
+	
+		//achar o nó
+		
+		//fazer os casos
+		return null;
+		
+	}
 }
 
