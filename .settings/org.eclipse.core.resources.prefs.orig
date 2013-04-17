@@ -1,4 +1,8 @@
 #Tue Apr 16 15:56:24 BRT 2013
 eclipse.preferences.version=1
 encoding//src/BSTree.java=UTF-8
+<<<<<<< HEAD
+encoding//src/BTree.java=UTF-8
+=======
 encoding//src/RBTree.java=UTF-8
+>>>>>>> 8fd6b7365b01dd11f8e1ef4fb328b362e99ee8ab

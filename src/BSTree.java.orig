@@ -262,6 +262,54 @@ public class BSTree<T>
 		if (foundNode == null)
 			return null;
 		
+<<<<<<< HEAD
+		
+		//CASO 1: NÓ SEM FILHOS
+		
+		//verifica se é filho esquerdo ou direito e seta
+		//o respectivo filho de seu pai pra null
+		
+		//falta fazer o caso em que o foundNode é raiz
+		
+		BSNode<T> parent = foundNode.getParent();
+		
+		if( ! ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) )
+		{
+			if (foundNode.isLeft())
+			{
+				parent.setLeft(new BSNode<T>());
+			}
+			else
+			{
+				parent.setRight(new BSNode<T>());
+			}
+		}
+		
+		//CASO 2: NÓ SÓ TEM UM FILHO
+		
+		//substitui o pai
+		
+		if ( ( foundNode.hasLeftChild() || foundNode.hasRightChild() ) 
+				&& !( foundNode.hasLeftChild() && foundNode.hasRightChild() )
+				)
+		{
+			if(foundNode.hasLeftChild()){
+				
+				BSNode<T> son = foundNode.getLeft();
+				
+				if (foundNode.isLeft())
+				{
+					parent.setLeft(son);
+				}
+				else
+				{
+					parent.setRight(son);
+				}
+			}
+			else{
+				
+				BSNode<T> son = foundNode.getRight();
+=======
 		//se o n�� n��o tiver filhos
 		if (!(foundNode.hasLeftChild() || foundNode.hasRightChild()))
 		{	
@@ -272,6 +320,7 @@ public class BSTree<T>
 			else 
 			{
 				BNode<T> parent = foundNode.getParent();
+>>>>>>> 8fd6b7365b01dd11f8e1ef4fb328b362e99ee8ab
 				
 				if (foundNode.isLeft())
 					parent.setLeft(new BNode<T>());
