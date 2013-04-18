@@ -6,7 +6,11 @@ public class BTree<T> {
     }
 
     public void insertValue(T value) {
-	BNode<T> node = getRoot();
+	BNode<T> whereToInsert = getRoot();
+	
+	while (whereToInsert != null) {
+	    
+	}
     }
 
     public BNode<T> getRoot() {
