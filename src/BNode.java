@@ -1,37 +1,38 @@
 import java.util.Arrays;
 
 public class BNode<T> {
-    private BNodeData<T>[] nodeData;
-    private int maxNodes;
-    private int nNodes;
+	private BNodeData<T>[] nodeData;
+	private BNode<T>[] children;
+	private int maxNodes;
+	private int nNodes;
 
-    public BNode(int t) {
-	nNodes = 0;
-	maxNodes = 2 * t - 1;
-	nodeData = (BNodeData<T>[]) new BNodeData<?>[maxNodes];
-    }
-
-    public void addNode(T data, int key) {
-	nodeData[nNodes++] = new BNodeData<T>(data, key);
-
-	Arrays.sort(nodeData);
-    }
-
-    public boolean isFull() {
-	return nNodes == maxNodes;
-    }
-
-    public BNode<T> whereToInsert(int key) {
-	int i = 0;
-	
-	BNodeData<T> data = (BNodeData<T>) nodeData[i];
-	
-	while (data.getKey() < key)
-	{
-	    i++;
-	    data = (BNodeData<T>) nodeData[i];
+	public BNode(int t) {
+		nNodes = 0;
+		maxNodes = 2 * t - 1;
+		children = (BNode<T>[]) new BNode<?>[maxNodes + 1];
+		nodeData = (BNodeData<T>[]) new BNodeData<?>[maxNodes];
 	}
-	
-	return data.getLess();
-    }
+
+	public void addNode(T data, int key) {
+		nodeData[nNodes++] = new BNodeData<T>(data, key);
+
+		Arrays.sort(nodeData);
+	}
+
+	public boolean isFull() {
+		return nNodes == maxNodes;
+	}
+
+	public BNode<T> whereToInsert(int key) {
+		int i = 0;
+
+		BNodeData<T> data = (BNodeData<T>) nodeData[i];
+
+		while (data.getKey() < key) {
+			i++;
+			data = (BNodeData<T>) nodeData[i];
+		}
+
+		return data.getLess();
+	}
 }

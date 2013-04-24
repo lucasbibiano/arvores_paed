@@ -5,6 +5,7 @@ public class RBNode<T> extends BSNode<T>
 
 	public static final Color RED = Color.RED;
 	public static final Color BLACK = Color.BLACK;
+	public static final Color DOUBLE_BLACK = Color.DOUBLE_BLACK;
 
 	private Color color;
 
