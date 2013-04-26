@@ -100,8 +100,9 @@ public class BNode<T> {
 		return children;
 	}
 	
-/*	public void addNode(T data, int key) {
-		nodeData[nNodes++] = new BNodeData<T>(data, key);
+	public void addNode(T data, int key) {
+		nodeData[nNodes++] = new BData<T>(key, data);
+	}
 
 	public boolean isFull() {
 		return nNodes == maxNodes;
