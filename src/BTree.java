@@ -104,4 +104,33 @@ public class BTree<T> {
 	public void setRoot(BNode<T> root) {
 		this.root = root;
 	}
+	
+	public Integer search(int key){
+		BNode node = searchHelper(getRoot(), key);
+		
+		if(node == null)
+			return null;
+		
+		return node.getPosition(key);
+	}
+	
+	private BNode searchHelper(BNode node, int key){
+		if(node.isLeaf())
+			return node;
+		
+		BData[] keys = node.getNodeData();
+		
+		for (int i = 0; i < node.getNumberOfKeys(); i++) {
+			BData key_in_node = keys[i];
+			
+			if(key_in_node.getKey() == key)
+				return node;
+			if(key_in_node.getKey() > key)
+				searchHelper(node.getChildren()[i], key);
+			if(key_in_node.getKey() < key && i == (node.getNumberOfKeys()-1))
+				searchHelper(node.getChildren()[i+1], key);
+		}
+		
+		return null;
+	}
 }

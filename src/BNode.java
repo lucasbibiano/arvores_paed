@@ -36,6 +36,22 @@ public class BNode<T> {
 		});
 	}
 	
+	public int getPosition(int key){
+		for(int i = 0; i < getNumberOfKeys(); i++){
+			if (key == getNodeData()[i].getKey())
+				return i;
+		}
+		return (Integer) null;
+	}
+	
+	public int getNumberOfKeys(){
+		return nNodes;
+	}
+	
+	public BData<T>[] getNodeData(){
+		return nodeData;
+	}
+	
 	protected void add(BData<T> data) {
 		add(data.getData(), data.getKey());
 	}
