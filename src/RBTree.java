@@ -266,6 +266,8 @@ public class RBTree<T> extends BSTree<T>
 			else
 				node.getParent().setRight(new RBNode<T>());
 		}
+		
+		return (T) node.getValue();
 	}
 
 	public void adjustTree(RBNode node)
@@ -279,13 +281,12 @@ public class RBTree<T> extends BSTree<T>
 
 				if (sibling.getColor() == RBNode.RED) 
 				{
-					sibling.setColor(RBNode.BLACK);
-
 					RBNode parent = (RBNode) node.getParent();
-					RBNode grand = (RBNode) node.getGrandfather();
-					parent.setColor(RBNode.RED);
-
-					leftRot(grand, parent);
+					
+					leftRot(parent, sibling);
+					parent.swapColor();
+					sibling.swapColor();
+					
 					sibling = (RBNode) node.getParent().getRight();
 				}
 
@@ -299,17 +300,18 @@ public class RBTree<T> extends BSTree<T>
 				} else {
 					if (right_sibling.getColor() == RBNode.BLACK) 
 					{
-						left_sibling.setColor(RBNode.BLACK);
-						sibling.setColor(RBNode.BLACK);
-						rightRot((RBNode) sibling.getGrandfather(), (RBNode) sibling.getParent());
+						rightRot(sibling, left_sibling);
+						left_sibling.swapColor();
+						sibling.swapColor();
+						
 						sibling = (RBNode) sibling.getParent().getRight();
 					}
 
 					RBNode parent = (RBNode) node.getParent();
-					sibling.setColor(parent.getColor());
-					parent.setColor(RBNode.BLACK);
-					sibling.setColor(RBNode.BLACK);
-					leftRot((RBNode) parent.getParent(), parent);
+					leftRot(parent, sibling);
+					sibling.swapColor();
+					parent.swapColor();
+					
 					node = (RBNode) getRoot();
 				}
 			} 
@@ -320,11 +322,12 @@ public class RBTree<T> extends BSTree<T>
 				if (sibling.getColor() == RBNode.RED) 
 				{
 					RBNode parent = (RBNode) node.getParent();
-
-					sibling.setColor(RBNode.BLACK);
-					parent.setColor(RBNode.RED);
-					rightRot((RBNode) parent.getParent(), parent);
-					sibling = (RBNode) parent.getLeft();
+					
+					rightRot(parent, sibling);
+					parent.swapColor();
+					sibling.swapColor();
+					
+					sibling = (RBNode) node.getParent().getLeft();
 				}
 
 				RBNode left_sibling = (RBNode) sibling.getLeft();
@@ -339,17 +342,18 @@ public class RBTree<T> extends BSTree<T>
 				{
 					if (right_sibling.getColor() == RBNode.BLACK)  
 					{
-						right_sibling.setColor(RBNode.BLACK);
-						sibling.setColor(RBNode.RED);
-						leftRot((RBNode) sibling.getGrandfather(), (RBNode) sibling.getParent())
-						sibling = (RBNode) node.getParent().getLeft();
+						rightRot(sibling, left_sibling);
+						left_sibling.swapColor();
+						sibling.swapColor();
+						
+						sibling = (RBNode) sibling.getParent().getRight();
 					}
 
 					RBNode parent = (RBNode) node.getParent();
-					sibling.setColor(parent.getColor());
-					parent.setColor(RBNode.BLACK);
-					((RBNode) sibling.getLeft()).setColor(RBNode.BLACK);
-					leftRot((RBNode) parent.getParent(), parent);
+					leftRot(parent, sibling);
+					sibling.swapColor();
+					parent.swapColor();
+					
 					node = (RBNode) getRoot();
 				}
 			}
