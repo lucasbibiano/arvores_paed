@@ -4,8 +4,8 @@ public class BNodeData<T> implements Comparable<BNodeData<T>> {
 	private T data;
 	private int key;
 
-	private BNode<T> less;
-	private BNode<T> high;
+	private BNode less;
+	private BNode high;
 
 	public BNodeData(T data, int key) {
 		this.data = data;
@@ -37,19 +37,19 @@ public class BNodeData<T> implements Comparable<BNodeData<T>> {
 		return this.key - other.key;
 	}
 
-	public BNode<T> getLess() {
+	public BNode getLess() {
 		return less;
 	}
 
-	public void setLess(BNode<T> less) {
+	public void setLess(BNode less) {
 		this.less = less;
 	}
 
-	public BNode<T> getHigh() {
+	public BNode getHigh() {
 		return high;
 	}
 
-	public void setHigh(BNode<T> high) {
+	public void setHigh(BNode high) {
 		this.high = high;
 	}
 }
