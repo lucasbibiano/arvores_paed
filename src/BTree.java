@@ -100,6 +100,15 @@ public class BTree<T> {
 	public BNode<T> getRoot() {
 		return root;
 	}
+	
+	public BNode split (BNode node){
+		int max_node = node.getMaxNodes();
+		int middle = (max_node-1)/2;
+		BNode new_node = new BNode(max_node, node.getKeys()[middle]);
+		new_node.setParent(node.getParent());
+		
+		BNode new_children_left = new BNode(max_node);
+		BNode new_children_right = new BNode(max_node);
 
 	public void setRoot(BNode<T> root) {
 		this.root = root;

@@ -99,6 +99,9 @@ public class BNode<T> {
 	public BNode<T>[] getChildren() {
 		return children;
 	}
+	
+/*	public void addNode(T data, int key) {
+		nodeData[nNodes++] = new BNodeData<T>(data, key);
 
 	public boolean isFull() {
 		return nNodes == maxNodes;
