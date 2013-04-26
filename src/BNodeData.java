@@ -1,4 +1,4 @@
-public class BNodeData<T> implements Comparable<BNodeData<T>> {
+public class BNodeData<T> implements Comparable<Integer> {
 	private static final int INVALID_KEY = Integer.MAX_VALUE;
 
 	private T data;
@@ -33,8 +33,8 @@ public class BNodeData<T> implements Comparable<BNodeData<T>> {
 	}
 
 	@Override
-	public int compareTo(BNodeData<T> other) {
-		return this.key - other.key;
+	public int compareTo(Integer o) {
+		return this.key - o;
 	}
 
 	public BNode getLess() {
